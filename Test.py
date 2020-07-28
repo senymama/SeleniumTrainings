@@ -13,14 +13,17 @@ try:
         EC.presence_of_element_located((By.ID, 'logo'))  # logo это логотип гугла в левом верхнем углу
     )  # если в течении 10 секунд он не нащёл logo то он завершит код
 finally:
-    content = driver.find_elements_by_class_name(
-        'g')  # класс g это блок ответа (гиперссылка название и краткое описание)
-    for i in range(len(content)):  # проходимся по масиву
-        href = content[i].find_element_by_xpath("//div[@class='rc']/div[@class='r']/a").get_attribute('href')
-        print(content[i].text)
-        print(content[i].get_attribute(""))
-        print('href = {href}, Название =, Описание ='.format(href=href))
-        print("_----------_")
-    print(content)
-    driver.quit()  # выход из драйвера
-
+    try:
+        content = driver.find_elements_by_class_name(
+            'g')  # класс g это блок ответа (гиперссылка название и краткое описание)
+        for i in range(len(content)):  # проходимся по масиву
+            href = content[i].find_element_by_xpath("//div[@class='rc']/div[@class='r']/a").get_attribute("innerHTML")
+            print(content[i].text)
+            print(content[i].get_attribute("innerHTML"))
+            print('href = {href}, Название =, Описание ='.format(href=href))
+            print("_----------_")
+        print(content)
+        driver.quit()  # выход из драйвера
+    except Exception as e:
+        driver.quit()
+        quit(e)
