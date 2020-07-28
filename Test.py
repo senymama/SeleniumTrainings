@@ -17,7 +17,7 @@ finally:
         content = driver.find_elements_by_class_name(
             'g')  # класс g это блок ответа (гиперссылка название и краткое описание)
         for i in range(len(content)):  # проходимся по масиву
-            href = content[i].find_element_by_xpath("//div[@class='rc']/div[@class='r']/a").get_attribute('href')
+            href = content[i].find_element_by_xpath("//div[@class='rc']/div[@class='r']/a").get_attribute('innerHTML')
             print(content[i].text)
             print(content[i].get_attribute("innerHTML"))
             print('href = {href}, Название =, Описание ='.format(href=href))
